@@ -1,0 +1,32 @@
+﻿@model CallHelloAPI.Model.Owner
+
+
+<h2>Detail</h2>
+
+<div id="app">
+    <p v-for="item in todoList">{{item.title}} : {{item.text}}</p>
+    <input type="hidden" id="HN" asp-for="HN" class="form-control" />
+    <input type="hidden" id="Name" asp-for="Name" class="form-control" />
+    <input type="hidden" id="Phone" asp-for="Phone" class="form-control" />
+    <input type="hidden" id="Email" asp-for="Email" class="form-control" />
+</div>
+<a asp-controller="ListOwner">Black to transection</a>
+<script>
+
+    var Name = $("#Name").val();
+    var HN = $("#HN").val();
+    var Phone = $("#Phone").val();
+    var Email = $("#Email").val();
+    var app = new Vue({
+        el: '#app',
+        data: {
+            todoList: [
+                { title: "HN", text: HN },
+                { title: "Name", text: Name },
+                { title: "Phone", text: Phone },
+                { title: "Email", text: Email },
+            ]
+        }
+    })
+
+</script>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CallHelloAPI.Model.Owner>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<h2>List Owner</h2>
+
+<div id="app">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Operation</th>
+                <th>
+                    HN เจ้าของ
+                </th>
+                <th>
+                    ชื่อเจ้าของ
+                </th>
+                <th>
+                    เบอร์โทรติดต่อ
+                </th>
+                <th>
+                    อีเมล์
+                </th>
+            </tr>
+        </thead>
+        <tbody>  
+            <tr v-for="item in agr1" :key="item.hn">               
+                <td><a v-bind:href="'../DetailOwner/Index/'+item.hn">Detail</a></td>               
+                <td><div id="hn">{{ item.hn }}</div></td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>   
+    new Vue({
+        el: "#app",
+        data: {           
+            agr1: []
+        },
+            mounted() {
+                this.getAll(); //DISPLAY TABLE ON PAGE LOAD
+            },
+            methods: {               
+                getAll: function () {
+                    var self = this;
+                    console.log('teste');
+                    $.ajax({
+                        url: '../api/Owner/Transection',
+                        type: "GET",
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response); // 
+                            self.agr1 = response;
+                            console.log(self.agr1);
+                            console.log('success!');
+                        },
+                        error: function () {
+                            console.log('error');
+                        } //end error function 
+                    }); //end $.ajax() request 
+                }, //end getAll function
+        }, //end methods
+        
+    });
+
+</script>
